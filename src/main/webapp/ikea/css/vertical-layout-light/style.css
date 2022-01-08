@@ -10133,7 +10133,7 @@ pre code {
 .table, .jsgrid .jsgrid-table {
   width: 100%;
   margin-bottom: 1rem;
-  color: #FFFFFF;
+  color: #212529;
 }
 
 .table th, .jsgrid .jsgrid-table th,
@@ -11235,8 +11235,8 @@ fieldset:disabled .wizard > .actions a,
 
 .btn-warning {
   color: #212529;
-  background-color: #FFDA1A;
-  border-color: #23559E;
+  background-color: #FFC100;
+  border-color: #FFC100;
 }
 
 .btn-warning:hover {
@@ -13783,7 +13783,7 @@ input[type="button"].btn-block {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid #e3e3e3;
-  border-radius: 5px;
+  border-radius: 20px;
 }
 
 .card > hr {
@@ -18895,8 +18895,7 @@ button.bg-dark:focus,
 }
 
 .text-primary, .list-wrapper .completed .remove {
-  color: #FFDA1A !important;
-  font-weight:bold;
+  color: #4B49AC !important;
 }
 
 a.text-primary:hover, .list-wrapper .completed a.remove:hover, a.text-primary:focus, .list-wrapper .completed a.remove:focus {
@@ -20234,7 +20233,6 @@ code {
 
 .fs-30 {
   font-size: 30px;
-  display:inline;
 }
 
 .chartjs-legend ul {
@@ -20886,11 +20884,10 @@ code {
 
 /* Buttons */
 .btn, .fc button, .ajax-upload-dragdrop .ajax-file-upload, .swal2-modal .swal2-buttonswrapper .swal2-styled, .swal2-modal .swal2-buttonswrapper .swal2-styled.swal2-confirm, .swal2-modal .swal2-buttonswrapper .swal2-styled.swal2-cancel, .wizard > .actions a {
-  font-size: 1rem;
+  font-size: 0.875rem;
   line-height: 1;
   font-weight: 400;
   border-radius: 15px;
-  font-weight:bold;
   /* Buttons with only icons */
   /* Buttons with icon and text */
 }
@@ -22089,12 +22086,12 @@ code {
 }
 
 .card.card-dark-blue {
-  background: #23559E;
+  background: #4747A1;
   color: #ffffff;
 }
 
 .card.card-dark-blue:hover {
-  background: #23749E;
+  background: #5050b2;
 }
 
 .card.card-light-blue {
@@ -24610,7 +24607,7 @@ dl li {
   border-top: 0;
   border-bottom-width: 1px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: .875rem;
 }
 
 .table thead th i, .jsgrid .jsgrid-table thead th i {
@@ -24628,7 +24625,7 @@ dl li {
 
 .table td,
 .jsgrid .jsgrid-table td {
-  font-size: 1rem;
+  font-size: 0.875rem;
 }
 
 .table td img, .jsgrid .jsgrid-table td img {
@@ -28436,7 +28433,7 @@ div.tagsinput span.tag a {
 
 .main-panel {
   transition: width 0.25s ease, margin 0.25s ease;
-  width: calc(100%);
+  width: calc(100% - 235px);
   min-height: calc(100vh - 60px);
   display: -webkit-flex;
   display: flex;

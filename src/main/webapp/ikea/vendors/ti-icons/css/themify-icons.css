@@ -23,11 +23,6 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.round {
-	width: 60px;
-	border-radius: 50%;
-}
-
 .ti-wand:before {
 	content: "\e600";
 }

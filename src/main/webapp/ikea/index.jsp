@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%> 
 <%
+/*
 Connection c =null;
 Statement stmt =null;
 ResultSet rs = null;
@@ -17,12 +18,11 @@ try{
 	stmt = c.createStatement();
 	rs = stmt.executeQuery("Select * from dbo.customer");
 	while(rs.next()){
-	name = rs.getString("NAME");
+	name = rs.getString("c_name");
 	
 	
 	}
 	System.out.println("123:"+name);
-	request.setAttribute("name",name);
 	
 	
 }catch (Exception e){
@@ -37,13 +37,19 @@ finally{
 		
 	}
 }
-	
+*/	
 %>
 <!DOCTYPE html>
   
 <html lang="en">
 
 <head>
+<script
+   src="https://code.jquery.com/jquery-3.2.1.min.js"
+   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+   crossorigin="anonymous">
+  </script>
+
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -68,34 +74,7 @@ finally{
 
 
 <body>
-<p>時間:<sapn class="times"></sapn></p>
-<script>
-setInterval(function(){
-	AutoFresh();
-},2000);
 
-function Autofresh(){
-	$.ajax({
-		url:'time.jsp',
-		type:'POST',
-		success:function(data){
-			console.log('Submission was successful.');
-			 console.log(data);
-             var start = data.indexOf("<times>");
-             var end = data.indexOf("</times>");
-             var times = data.substring(start + 7, end).trim();
-             $(".times").html("");
-             $(".times").html(times);
-		},
-		error:function((XMLHttpRequest, status, error){
-			console.log(error)
-		}
-	})
-	Autofresh();
-}
-
-
-</script>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -472,8 +451,38 @@ function Autofresh(){
         </ul>
       </nav>
       <!-- partial -->
+      
       <div class="main-panel">
-        <div class="content-wrapper">
+    
+   <h1 id ="alarm"></h1>  
+
+
+<script>
+/*
+setInterval(function() {
+	getalarm();
+}, 2000);
+	
+	
+function getalarm(){
+	$.ajax({
+		url:'${pageContext.request.contextPath}/TestServlet',
+		type:'POST',
+		success:function(data){
+		$(alarm).html(data);
+		},
+		error:function(error){
+			console.log("Hello world_!");
+			console.log(error)
+		}
+	})
+	
+}
+//getalarm();
+*/
+   
+</script>
+     <div class="content-wrapper">
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="row">
@@ -500,17 +509,18 @@ function Autofresh(){
             </div>
           </div>
           <div class="row">
+         <!--
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card tale-bg">
                 <div class="card-people mt-auto">
                   <img src="images/dashboard/people.svg"  alt="people">
                   <div class="weather-info">      
                     <div class="d-flex">   
-                   <!--          
+                             
                       <div>
                         <h2 class="mb-0 font-weight-normal"><i class="icon-sun mr-2"></i>31<sup>C</sup></h2>
                       </div>
-                    -->  
+                     
         
                       <div class="ml-2">
                         <h4 class="location font-weight-normal"></h4>
@@ -522,9 +532,10 @@ function Autofresh(){
                 </div>
               </div>
             </div>
-            <div class="col-md-6 grid-margin transparent">
+       照片 -->    
+            <div class="col-md-12 grid-margin transparent">
               <div class="row">
-                <div class="col-md-6 mb-4 stretch-card transparent">
+                <div class="col-md-3 mb-4 stretch-card transparent">
                   <div class="card card-tale">
                     <div class="card-body">
                       <p class="mb-4">Revenue</p>
@@ -533,7 +544,7 @@ function Autofresh(){
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 mb-4 stretch-card transparent">
+                <div class="col-md-3 mb-4 stretch-card transparent">
                   <div class="card card-dark-blue">
                     <div class="card-body">
                       <p class="mb-4">Sales</p>
@@ -542,9 +553,9 @@ function Autofresh(){
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+           
+              
+                <div class="col-md-3 mb-4  stretch-card transparent">
                   <div class="card card-light-blue">
                     <div class="card-body">
                       <p class="mb-4">Growth</p>
@@ -553,7 +564,7 @@ function Autofresh(){
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 stretch-card transparent">
+                <div class="col-md-3 mb-4 stretch-card transparent">
                   <div class="card card-light-danger">
                     <div class="card-body">
                       <p class="mb-4">Number of Clients</p>
@@ -685,19 +696,22 @@ function Autofresh(){
                                   </table>
                                 </div>
                               </div>
+                               
                               <div class="col-md-6 mt-3">
                                 <canvas id="north-america-chart"></canvas>
                                 <div id="north-america-legend"></div>
                               </div>
+                              
                             </div>
                           </div>
                         </div>
                       </div>
+                      <!--  
                       <div class="carousel-item">
                         <div class="row">
                           <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
                             <div class="ml-xl-4 mt-3">
-                            <p class="card-title">Detailed Reports</p>
+                            <p class="card-title">Detailed Report</p>
                               <h1 class="text-primary">$34040</h1>
                               <h3 class="font-weight-500 mb-xl-4 text-primary">North America</h3>
                               <p class="mb-2 mb-xl-0">The total number of sessions within the date range. It is the period time a user is actively engaged with your website, page or app, etc</p>
@@ -773,6 +787,7 @@ function Autofresh(){
                           </div>
                         </div>
                       </div>
+                      -->
                     </div>
                     <a class="carousel-control-prev" href="#detailedReports" role="button" data-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -796,7 +811,7 @@ function Autofresh(){
                     <table class="table table-striped table-borderless">
                       <thead>
                         <tr>
-                          <th>Product</th>
+                          <th>Name</th>
                           <th>Price</th>
                           <th>Date</th>
                           <th>Status</th>
@@ -804,49 +819,102 @@ function Autofresh(){
                       </thead>
                       <tbody>
                         <tr>
-                          <td>Chair</td>
-                          <td class="font-weight-bold">$362</td>
-                          <td>21 Sep 2018</td>
-                          <td class="font-weight-medium"><div class="badge badge-success">Completed</div></td>
+                          <td></td>
+                          <td class="font-weight-bold"></td>
+                          <td></td>
+                          <td class="font-weight-medium"><div class="badge badge-success"></div></td>
                         </tr>
-                     
-                        <tr>
-                          <td>Bed</td>
-                          <td class="font-weight-bold">$551</td>
-                          <td>28 Sep 2018</td>
-                          <td class="font-weight-medium"><div class="badge badge-warning">Pending</div></td>
-                        </tr>
-                        <tr>
-                          <td>closet</td>
-                          <td class="font-weight-bold">$523</td>
-                          <td>30 Jun 2018</td>
-                          <td class="font-weight-medium"><div class="badge badge-warning">Pending</div></td>
-                        </tr>
-                        <tr>
-                          <td>E-Mail Marketing</td>
-                          <td class="font-weight-bold">$781</td>
-                          <td>01 Nov 2018</td>
-                          <td class="font-weight-medium"><div class="badge badge-danger">Cancelled</div></td>
-                        </tr>
-                        <tr>
-                          <td>Referral Marketing</td>
-                          <td class="font-weight-bold">$283</td>
-                          <td>20 Mar 2018</td>
-                          <td class="font-weight-medium"><div class="badge badge-warning">Pending</div></td>
-                        </tr>
-                        <tr>
-                          <td>Social media marketing</td>
-                          <td class="font-weight-bold">$897</td>
-                          <td>26 Oct 2018</td>
-                          <td class="font-weight-medium"><div class="badge badge-success">Completed</div></td>
-                        </tr>
+                    
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
             </div>
+   <script>
+   
+setInterval(function() {
+	getCount();
+}, 2000);
+	
+	
+function getCount(){
+	$.ajax({
+		url:'${pageContext.request.contextPath}/GetCount',
+		type:'POST',
+		dataType: "json", 
+		success:function(data){
+		$('#css_1').width(data[0].num)
+		$('#data1').html(data[0].num);
+		$('#css_2').width(data[1].num)
+		$('#data2').html(data[1].num);
+		$('#css_3').width(data[2].num)
+		$('#data3').html(data[2].num);
+		
+		},
+		error:function(error){
+			console.log("Hello world_!");
+			console.log(error)
+		}
+	})
+	
+}
+
+
+</script>         
             <div class="col-md-5 grid-margin stretch-card">
+                   <div class="col-md-12 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <p class="card-title">Top Like</p>
+                      <div class="charts-data">
+                        <div class="mt-3">
+                          <p class="mb-0">黑色高質感盤子</p>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div class="progress progress-md flex-grow-1 mr-4">
+                              <div id="css_1" class="progress-bar bg-info" role="progressbar" style="width:1%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="1000"></div>
+                            </div>
+                            <p id="data1">1</p>
+                          </div>
+                        </div>
+                        <div class="mt-3">
+                          <p class="mb-0">木質感盤子</p>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div class="progress progress-md flex-grow-1 mr-4">
+                              <div id="css_2" class="progress-bar bg-info" role="progressbar" style="width:1%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="1000"></div>
+                            </div>
+                            <p id="data2">1</p>
+                          </div>
+                        </div>
+                        <div class="mt-3">
+                          <p class="mb-0">簡約風盤子</p>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div class="progress progress-md flex-grow-1 mr-4">
+                              <div id="css_3" class="progress-bar bg-info" role="progressbar" style="width:1%" aria-valuenow="48" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p id="data3">1</p>
+                          </div>
+                        </div>
+                        <!--  
+                        <div class="mt-3">
+                          <p class="mb-0">Data 4</p>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div class="progress progress-md flex-grow-1 mr-4">
+                              <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p class="mb-0">687</p>
+                          </div>
+                        </div>
+                       -->
+                      </div>  
+                    </div>
+                  </div>
+                </div>	
+            	
+            	
+            	<!--  
+            	
+            	
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">To Do Lists</h4>
@@ -905,8 +973,11 @@ function Autofresh(){
 									</div>
 								</div>
 							</div>
+							-->
             </div>
+            
           </div>
+          <!--  
           <div class="row">
             <div class="col-md-4 stretch-card grid-margin">
               <div class="card">
@@ -1087,6 +1158,8 @@ function Autofresh(){
               </div>
             </div>
           </div>
+          -->
+          <!--  
           <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
@@ -1119,6 +1192,7 @@ function Autofresh(){
               </div>
             </div>
         </div>
+        -->
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
