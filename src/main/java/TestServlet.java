@@ -83,5 +83,6 @@ public class TestServlet extends HttpServlet {
 		 
 		 PrintWriter out=response.getWriter();
 		 out.write(name);
+		
 	 }
 }

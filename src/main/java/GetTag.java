@@ -18,19 +18,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson; 
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class GetCount
+ * Servlet implementation class GetTag
  */
-@WebServlet(name = "GetCount",urlPatterns = {"/GetCount"})
-public class GetCount extends HttpServlet {
+
+@WebServlet(name = "GetTag",urlPatterns = {"/GetTag"})
+public class GetTag extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetCount() {
+    public GetTag() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,13 +51,14 @@ public class GetCount extends HttpServlet {
 		// TODO Auto-generated method stub
 		work(request, response);
 	}
-	
+
 	 private void work(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
 			
-	
+			
 	
 		 Connection c = null;
-	
+		 String tag = request.getParameter("tag"); 
+			System.out.println(tag);
 		 List<Map<String, Object>> lists = new ArrayList<Map<String, Object>>();
 		 try{
 		 	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -66,24 +68,21 @@ public class GetCount extends HttpServlet {
 		 	c=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;database=ikea",user,pwd);
 		 	
 		 	System.out.println("連線成功");
-		 	Statement stmt1 = c.createStatement();
-		 	ResultSet rs1 = stmt1.executeQuery("select  p_id, count(*) as num from dbo.gameData where like_num=1"
-		 			+ "group by p_id");
-		 	ResultSetMetaData metaData = rs1.getMetaData();
-		 	int columnCount = metaData.getColumnCount();
+		 	Statement stmt = c.createStatement();
+		 	ResultSet rs = stmt.executeQuery("SELECT c_name ,tag_name FROM gameData g\r\n"
+		 			+ "LEFT JOIN Customer c ON  c.c_id = g.c_id\r\n"
+		 			+ "LEFT JOIN Tag t ON t.t_id = g.t_id\r\n"
+		 			+ "WHERE tag_name ='"+tag+"'");
 		 	
-		 	while(rs1.next()){
+		 	while(rs.next()){
 		 		Map map = new HashMap();
-		 		for (int i=1 ; i<=columnCount; i++) {
-		 	 map.put ("p_id",rs1.getString("p_id"));
-		 	 map.put ("num",rs1.getString("num"));	
+		 		map.put ("c_name",rs.getString("c_name"));
 		 	
-		 	}
+		 	
+		 	
 		 	lists.add(map);
-		 }
-		System.out.println(lists);
-		 	
-		 	
+		 	}
+		 System.out.println(lists);
 		 }catch (Exception e){
 		 	System.out.println(e.getClass().getName()+":"+e.getMessage());
 		 	System.out.println("error");
@@ -101,7 +100,10 @@ public class GetCount extends HttpServlet {
 		Gson gson = new Gson();
 		String json_list = gson.toJson(lists);
 		out.write(json_list);
+		 request.setAttribute(json_list, json_list);
 		
 	 }
+
+	
 
 }

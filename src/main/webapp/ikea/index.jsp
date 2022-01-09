@@ -802,37 +802,67 @@ function getalarm(){
               </div>
             </div>
           </div>
+       <script>
+       /*
+  setInterval(function() {
+	getTalbe();
+}, 10000);
+*/
+function table_btn(){
+	$.ajax({
+		url:'${pageContext.request.contextPath}/GetTable',
+		type:'POST',
+		dataType: "json", 
+		success: function (data) {
+			$('#hong').css('visibility','visible');
+			$('#emp').empty();
+            $.each(data,function (index, item) {
+            	$('#emp').append("<tr><td>"+item.c_name+"</td></tr>")
+                 //   $('#emp>tr').find('td').html(data[index].c_name)
+                  
+            });
+        },
+		error:function(error){
+			console.log("Hello world_!");
+			console.log(error)
+		}
+	})
+	
+}        
+</script>
+
           <div class="row">
             <div class="col-md-7 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <p class="card-title mb-0">Top Products</p>
                   <div class="table-responsive">
-                    <table class="table table-striped table-borderless">
+                    <table id=hong class="table table-borderless" style="visibility:hidden">
                       <thead>
                         <tr>
                           <th>Name</th>
-                          <th>Price</th>
+                          <th>Sex</th>
                           <th>Date</th>
                           <th>Status</th>
                         </tr>  
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td></td>
-                          <td class="font-weight-bold"></td>
-                          <td></td>
-                          <td class="font-weight-medium"><div class="badge badge-success"></div></td>
-                        </tr>
-                    
+                      <tbody id="emp">
+                   
+                    	
                       </tbody>
                     </table>
                   </div>
+                  <button style="float:right"class="btn btn-success" id="btn_table" onclick="table_btn()">查詢</button>
                 </div>
+                
               </div>
+                   
             </div>
+        
    <script>
    
+
+
 setInterval(function() {
 	getCount();
 }, 2000);
@@ -859,7 +889,6 @@ function getCount(){
 	})
 	
 }
-
 
 </script>         
             <div class="col-md-5 grid-margin stretch-card">
@@ -975,7 +1004,60 @@ function getCount(){
 							</div>
 							-->
             </div>
-            
+<script>
+function subimt(){
+	var tag = $('#tag_input').val();
+	$.ajax({
+		url:'${pageContext.request.contextPath}/GetTag',
+		type:'POST',
+		dataType: "json", 
+		data:{
+			tag:tag
+		},
+		success: function (data) {
+			$('#tag_table').css('visibility','visible');
+			$('#tag_tbody').empty();
+            $.each(data,function (index, item) {
+            	$('#tag_tbody').append("<tr><td>"+item.c_name+"</td></tr>")
+                 //   $('#emp>tr').find('td').html(data[index].c_name)
+                  
+            });
+        },
+		error:function(error){
+			console.log("Hello world_!");
+			console.log(error)
+		}
+	});
+}
+	
+</script>
+  
+                           <form id="myform123">
+            	    <div class="input-group">
+              <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                <span class="input-group-text" id="search">
+                  <i class="icon-search"></i>
+                </span>
+              </div>
+              <input id="tag_input" class="form-control" placeholder="Search now"/>
+              <button  type="button" id="btn_tag" onclick="subimt()">test</button>
+            </div>
+            	 
+            </form>  
+                <table id=tag_table class="table table-borderless" style="visibility:hidden">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Sex</th>
+                          <th>Date</th>
+                          <th>Status</th>
+                        </tr>  
+                      </thead>
+                      <tbody id="tag_tbody">
+                   
+                    	
+                      </tbody>
+                    </table>       
           </div>
           <!--  
           <div class="row">
@@ -1193,6 +1275,8 @@ function getCount(){
             </div>
         </div>
         -->
+        
+     
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
